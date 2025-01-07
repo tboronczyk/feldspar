@@ -1,0 +1,206 @@
+@use "../node_modules/bulma/sass" as bulma;
+@use "bulma-divider.scss";
+
+:root {
+  // #fff
+  --white-h: 0;
+  --white-s: 0%;
+  --white-l: 100%;
+
+  // #c84e4a
+  --red-h: 2;
+  --red-s: 63%;
+  --red-l: 51%;
+
+  // #55af7a
+  --green-h: 145;
+  --green-s: 51%;
+  --green-l: 64%;
+
+  // #f8f6f9
+  --background-color-h: 280;
+  --background-color-s: 23%;
+  --background-color-l: 97%;
+  --background-color: hsl(var(--background-color-h), var(--background-color-s), var(--background-color-l));
+
+  // #0c2337
+  --dark-background-color: hsl(207, 65%, 13%);
+
+  // #6b5def
+  --link-h: 246;
+  --link-s: 82%;
+  --link-l: 65%;
+  --link-color: hsl(var(--link-h), var(--link-s), var(--link-l));
+
+  // #190038
+  --text-color: hsl(267, 100%, 11%);
+
+  --text-color-inverse: hsl(var(--white-h), var(--white-s), var(--white-l));
+
+  // ---- bulma overrides ----
+  --bulma-family-primary: BlinkMacSystemFont, -apple-system, "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
+  --bulma-body-font-size: 18px;
+
+  --bulma-scheme-h: var(--background-color-h);
+  --bulma-scheme-s: var(--background-color-s);
+  --bulma-scheme-main-l: var(--background-color-l);
+
+  --bulma-link-h: var(--link-h);
+  --bulma-link-s: var(--link-s);
+  --bulma-link-l: var(--link-l);
+
+  --bulma-danger-h: var(--red-h);
+  --bulma-danger-s: var(--red-s);
+
+  --bulma-success-h: var(--green-h);
+  --bulma-success-s: var(--green-s);
+
+  body {
+    --bulma-body-color: var(--text-color);
+  }
+
+  .content {
+    --bulma-content-heading-color: var(--text-color);
+  }
+
+  .label {
+    --bulma-label-color: var(--text-color);
+  }
+
+  .input {
+    --bulma-input-h: var(--white-h);
+    --bulma-input-s: var(--white-s);
+    --bulma-input-l: var(--white-l);
+  }
+
+  .message-body {
+    --bulma-message-border-style: none;
+  }
+}
+
+// expand content area to keep footer at bottom of page
+html {
+  height: 100%;
+
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    main {
+      flex: 1 0 auto;
+    }
+
+    &>footer {
+      flex-shrink: 0;
+    }
+  }
+}
+
+// prevent content area's width from collapsing if there's
+// insufficient text
+main {
+  width: 100%;
+}
+
+// nav menu on mobile shouldn't shift layout
+@media screen and (max-width: bulma.$desktop) {
+  .navbar-menu.is-active {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+// custom helpers
+.centered {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.narrow-container {
+  width: 450px;
+}
+
+// checkbox styling
+input[type="checkbox"].checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: hsl(0, 0%, calc(97% + 0%));
+  border-color: var(--bulma-input-border-color);
+  border-style: solid;
+  border-radius: 0.2em;
+  border-width: var(--bulma-control-border-width);
+  box-shadow: inset 0 0.0625em 0.125em hsla(var(--bulma-scheme-h), var(--bulma-scheme-s), var(--bulma-scheme-invert-l), 0.05);
+  margin: 0;
+  margin-right: 0.8em;
+  height: 1.5em;
+  width: 1.5em;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+
+  &:checked {
+    background-color: var(--link-color);
+  }
+
+  &:checked::before {
+    box-shadow: inset 1em 1em white;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    content: "";
+    height: 0.75em;
+    width: 0.75em;
+  }
+
+  &:focus {
+    border-color: hsl(var(--bulma-input-focus-h), var(--bulma-input-focus-s), var(--bulma-input-focus-l));
+    box-shadow: var(--bulma-input-focus-shadow-size) hsla(var(--bulma-input-focus-h), var(--bulma-input-focus-s), var(--bulma-input-focus-l), var(--bulma-input-focus-shadow-alpha));
+  }
+}
+
+// styles
+body {
+  &>header {
+    padding: 1em;
+  }
+
+  main {
+    padding: 1em;
+
+    &>.container {
+      padding-bottom: 3.5em;
+    }
+
+    .content {
+      h1, h2, h3, h4 {
+        font-weight: normal;
+      }
+      form {
+        margin-bottom: var(--bulma-content-block-margin-bottom);
+
+        .help {
+          font-size: 0.8em;
+        }
+      }
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &>footer {
+    background: var(--dark-background-color);
+    color: var(--text-color-inverse);
+    padding: 2em 1em;
+
+    a {
+      color: var(--text-color-inverse);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

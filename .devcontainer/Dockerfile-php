@@ -1,0 +1,12 @@
+ARG php_version
+
+FROM php:${php_version}-fpm
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends unzip libicu-dev pkg-config libzstd-dev \
+    && docker-php-ext-install intl pdo_mysql \
+    && pecl install redis && docker-php-ext-enable redis \
+    && pecl install xdebug && docker-php-ext-enable xdebug
+
+RUN apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/* 

@@ -1,0 +1,24 @@
+#! /usr/local/bin/php
+<?php
+
+declare(strict_types=1);
+
+use DI\ContainerBuilder;
+use Dotenv\Dotenv;
+use Feldspar\Helpers\DbAccess;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+Dotenv::createImmutable(__DIR__ . '/../')->load();
+
+$container = (new ContainerBuilder())
+    ->addDefinitions(__DIR__ . '/../app/container.php')
+    ->build();
+
+$db = $container->get(DbAccess::class);
+
+// delete otp tokens older than 20 minutes
+$db->query(
+    'DELETE FROM otp_tokens
+     WHERE created_at < DATE_SUB(CURRENT_TIMESTAMP(), INTERVAL 20 MINUTE)'
+);

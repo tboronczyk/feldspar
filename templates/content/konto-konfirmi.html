@@ -1,0 +1,33 @@
+<div class="narrow-container centered">
+  <h1>Konfirmado</h1>
+  <p>La konto estis kreita per ĉi tiuj informoj. Ĝisdatigu ilin laŭplaĉe.</p>
+  <form action="/konto/konfirmi" method="post">
+    <div class="field">
+      <label class="label">Uzantnomo</label>
+      <div class="control">
+        <input class="input{% if errors.username %} is-danger{% endif %}"
+          type="text" name="username" value="{{ account.username }}" placeholder="uzantnomo">
+        {% if errors.username %}
+        <p class="help is-danger">{{ errors.username }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Retpoŝtadreso</label>
+      <div class="control">
+        <input class="input{% if errors.email %} is-danger{% endif %}"
+          type="email" name="email" value="{{ account.email }}" placeholder="nomo@ekzemplo.com">
+        {% if errors.email %}
+        <p class="help is-danger">{{ errors.email }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-link is-fullwidth" type="submit">
+          Sendi
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
