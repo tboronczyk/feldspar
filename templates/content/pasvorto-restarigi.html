@@ -1,0 +1,36 @@
+<div class="narrow-container centered">
+  <h1>Restarigi pasvorton</h1>
+
+  {% include 'layouts/common/error-message.html' with {'errorMessage': errors.error} %}
+
+  <form action="/pasvorto/restarigi" method="post">
+    <div class="field">
+      <label class="label">Nova pasvorto</label>
+      <div class="control">
+        <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+          value="{{ password }}">
+        {% if errors.password %}
+        <p class="help is-danger">{{ errors.password }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Ripeti novan pasvorton</label>
+      <div class="control">
+        <input class="input{% if errors.confirmPassword %} is-danger{% endif %}" type="password" name="confirmPassword"
+          value="{{ confirmPassword }}">
+        {% if errors.confirmPassword %}
+        <p class="help is-danger">{{ errors.confirmPassword }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <input type="hidden" name="token" value="{{ token }}">
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary is-fullwidth" type="submit">
+          Sendi
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

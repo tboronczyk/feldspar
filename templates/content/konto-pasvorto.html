@@ -1,0 +1,40 @@
+<h1>Ŝanĝi pasvorton</h1>
+<form action="/konto/pasvorto" method="post">
+  <div class="field">
+    <label class="label">Nuna pasvorto</label>
+    <div class="control">
+      <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+        value="{{ password }}">
+      {% if errors.password %}
+      <p class="help is-danger">{{ errors.password }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Nova pasvorto</label>
+    <div class="control">
+      <input class="input{% if errors.newPassword %} is-danger{% endif %}" type="password" name="newPassword"
+        value="{{ newPassword }}">
+      {% if errors.newPassword %}
+      <p class="help is-danger">{{ errors.newPassword }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Ripeti novan pasvorton</label>
+    <div class="control">
+      <input class="input{% if errors.confirmPassword %} is-danger{% endif %}" type="password"
+        name="confirmPassword" value="{{ confirmPassword }}">
+      {% if errors.confirmPassword %}
+      <p class="help is-danger">{{ errors.confirmPassword }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-primary" type="submit">
+        Sendi
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,30 @@
+<h1>Tasko</h1>
+<form action="/konto/tasko{% if task.id %}/{{ task.id }}{% endif %}" method="post">
+  <div class="field">
+    <label class="label">Nomo</label>
+    <div class="control">
+      <input class="input{% if errors.name %} is-danger{% endif %}" type="text" name="name" value="{{ task.name }}"
+        placeholder="Nomo de tasko">
+      {% if errors.name %}
+      <p class="help is-danger">{{ errors.name }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <label class="label">Priskribo</label>
+    <div class="control">
+      <textarea class="textarea{% if errors.description %} is-danger{% endif %}" rows="8"
+        name="description">{{ task.description }}</textarea>
+      {% if errors.description %}
+      <p class="help is-danger">{{ errors.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <button class="button is-primary" type="submit">
+        Sendi
+      </button>
+    </div>
+  </div>
+</form>

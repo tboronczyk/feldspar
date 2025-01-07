@@ -1,0 +1,173 @@
+@use "../node_modules/bulma/sass" as bulma;
+@use "bulma-divider.scss";
+@use "bulma-checkbox.scss";
+
+:root {
+   --bulma-family-primary: BlinkMacSystemFont, -apple-system, "Helvetica Neue",
+     "Helvetica", "Arial", sans-serif;
+
+  // #fff
+  --background-color-h: 0;
+  --background-color-s: 0;
+  --background-color-l: 100%;
+  --background-color: hsl(var(--background-color-h), var(--background-color-s), var(--background-color-l));
+  
+  // #190038
+  --text-color-h: 267;
+  --text-color-s: 100%;
+  --text-color-l: 11%;
+  --text-color: hsl(var(--text-color-h), var(--text-color-s), var(--text-color-l));
+
+  // #6b5def
+  --link-color-h: 246;
+  --link-color-s: 82%;
+  --link-color-l: 65%;
+  --link-color: hsl(var(--link-color-h), var(--link-color-s), var(--link-color-l));
+
+  // #f8f6f9
+  --border-color-h: 280;
+  --border-color-s: 23%;
+  --border-color-l: 97%;
+  --border-color: hsl(var(--border-color-h), var(--border-color-s), var(--border-color-l));
+}
+
+// expand content area to keep footer at bottom of page
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+body>footer {
+  flex-shrink: 0;
+}
+
+// prevent content area's width from collapsing if there's
+// insufficient text
+main {
+  width: 100%;
+}
+
+// nav menu on mobile shouldn't shift layout
+@media screen and (max-width: bulma.$desktop) {
+  .navbar-menu.is-active {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+// styles
+html {
+  background-color: var(--background-color);
+  font-size: 18px;
+}
+
+.navbar {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+}
+
+.navbar-brand {
+  align-items: center;
+}
+
+.navbar-item,
+.navbar-burger,
+.button:not(.is-primary) {
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: var(--background-color);
+  }
+}
+
+.menu-list a {
+  background-color: var(--background-color);
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.button.is-primary {
+  background-color: var(--link-color);
+  color: white;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: hsl(var(--link-color-h), var(--link-color-s), calc(var(--link-color-l) - 5%));
+  }
+}
+
+main {
+  padding: 1em;
+
+  .content {
+    a {
+      text-decoration: underline;
+      color: var(--link-color);
+
+      &.button {
+        color: var(--text-color);
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--text-color);
+      font-weight: normal;
+    }
+ 
+    p, li {
+      color: var(--text-color);
+    }
+  }
+
+  &>.container {
+    padding-bottom: 3.5em;
+  }
+}
+
+.label {
+  color: var(--text-color);
+  font-weight: normal;
+
+  &:not(:last-child) {
+    margin-bottom: 0; 
+  }
+}
+
+// helpers
+.centered {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.narrow-container {
+  width: 450px;
+}
+
+body>footer {
+  background-color: #0c2337;
+  color: white;
+  padding: 2em 1em;
+
+  a {
+    color: white;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

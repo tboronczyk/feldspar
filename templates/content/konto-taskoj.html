@@ -1,0 +1,7 @@
+<h1>Taskoj</h1>
+<p><a href="/konto/tasko" title="Krei taskon">Krei taskon</a></p>
+<ul>
+  {% for task in tasks %}
+  <li><a href="/konto/tasko/{{ task.id }}">{{ task.name }}</a></li>
+  {% endfor %}
+</ul>

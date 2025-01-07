@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="eo">
+
+<head>
+  {% block head %}
+  {% include "layouts/common/head.html" %}
+  {% endblock %}
+</head>
+
+<body>
+  {% block header %}
+  {% include "layouts/common/header.html" %}
+  {% endblock %}
+
+  <main>
+    <div class="container">
+      {% block flashmessages %}
+      {% include "layouts/common/flash-messages.html" %}
+      {% endblock %}
+
+      {% block content %}
+      <div class="content">
+        {{ page.content | raw }}
+      </div>
+      {% endblock %}
+    </div>
+    </div>
+  </main>
+
+  {% block footer %}
+  {% include "layouts/common/footer.html" %}
+  {% endblock %}
+</body>
+
+</html>

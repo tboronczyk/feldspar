@@ -1,0 +1,7 @@
+=== Volontulo ===
+
+{{ content | raw }}
+
+
+---
+(c){{ date().format('Y') }} Volontulo

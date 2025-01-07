@@ -1,0 +1,28 @@
+<div class="narrow-container centered">
+  <h1>Registriĝi</h1>
+
+  <p>Ĉu vi jam registriĝis?
+    <a href="/ensaluti" title="Ensaluti">Ensalutu</a>.
+  </p>
+
+  <p>Kiam vi registriĝas, vi akceptas la
+    <a href="/uzokondicxoj" title="Uzokondiĉoj">Uzokondiĉojn</a>
+    kaj <a href="/privateco" title="Politiko pri Privateco">Politikon pri privateco</a>.
+  </p>
+
+  <p>{% include 'components/oauth2button.html' with {
+    'provider': 'Email',
+    'text': 'Registriĝi per Retpoŝtadreso',
+    'href': '/registrigxi/retposxto'
+    } %}</p>
+  <p>{% include 'components/oauth2button.html' with {
+    'provider': 'Google',
+    'text': 'Registriĝi per Google',
+    'href': '/registrigxi/google'
+    } %}</p>
+  <p>{% include 'components/oauth2button.html' with {
+    'provider': 'Facebook',
+    'text': 'Registriĝi per Facebook',
+    'href': '/registrigxi/facebook'
+    } %}</p>
+</div>

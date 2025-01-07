@@ -1,0 +1,45 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-one-fifth">
+    <aside class="menu">
+      <p class="menu-label">Konto</p>
+      <ul class="menu-list">
+        <li>
+          <a {% if active=='konto' %}class="is-active" {% endif %} href="/konto/konto" title="Agordi konton">Agordi
+            konton</a>
+        </li>
+        <li>
+          <a {% if active=='pasvorto' %}class="is-active" {% endif %} href="/konto/pasvorto"
+            title="Ŝanĝi pasvorton">Ŝanĝi pasvorton</a>
+        </li>
+      </ul>
+      <p class="menu-label">Volontuli</p>
+      <ul class="menu-list">
+        <li>
+          <a {% if active=='volontulo' %}class="is-active" {% endif %} href="/konto/volontulo"
+            title="Volontula profilo">Volontula profilo</a>
+        </li>
+      </ul>
+      <p class="menu-label">Organizi</p>
+      <ul class="menu-list">
+        <li>
+          <a {% if active=='organizanto' %}class="is-active" {% endif %} href="/konto/organizanto"
+            title="Organizanta profilo">Organizanta profilo</a>
+        </li>
+        <li>
+          <a {% if active=='taskoj' %}class="is-active" {% endif %} href="/konto/taskoj" title="Taskoj">Taskoj</a>
+        </li>
+      </ul>
+    </aside>
+  </div>
+  <div class="column">
+    <div class="content px-5 box is-shadowless">
+      {{ page.content | raw }}
+    </div>
+  </div>
+  <div class="column is-one-fifth">
+  </div>
+</div>
+{% endblock %}
