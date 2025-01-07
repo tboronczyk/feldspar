@@ -1,0 +1,42 @@
+<div class="columns">
+  <div class="column">
+    <div class="narrow-container centered">
+      <h1>Agordi konton</h1>
+      <form action="/konto/konto" method="post">
+        <div class="field">
+          <label class="label">Uzantnomo</label>
+          <div class="control">
+            <input class="input{% if errors.username %} is-danger{% endif %}" type="text" name="username" value="{{ account.username }}" placeholder="uzantnomo">
+            {% if errors.username %}
+            <p class="help is-danger">{{ errors.username }}</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Retpoŝtadreso</label>
+            <div class="control">
+              <input class="input{% if errors.email %} is-danger{% endif %}" type="email" name="email" value="{{ account.email }}" placeholder="nomo@ekzemplo.com">
+              {% if errors.email %}
+              <p class="help is-danger">{{ errors.email }}</p>
+              {% endif %}
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <a href="/konto/pasvorto" type="Ŝanĝi pasvorton">Ŝanĝi pasvorton</a>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-link is-fullwidth" type="submit">
+                Sendi
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  <div class="column is-one-fifth">
+    {% include 'layouts/common/menu-konto.html' with { 'active': 'konto' } %}
+  </div>
+</div>

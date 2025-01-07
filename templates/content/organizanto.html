@@ -1,0 +1,35 @@
+
+<div class="media">
+    <div class="media-left">
+      <figure class="image is-128x128">
+        <img src="/img/companylogo.png">
+      </figure>
+    </div>
+    <div class="media-content">
+      <h1>{{ org.name }}</h1>
+      <p>{{ org.location }}<br>
+        <strong>website</strong>: <a href="{{ org.website }}">{{ org.website }}</a><br>
+        <strong>email</strong>: <a href="mailto://{{ org.email }}">{{ org.email }}</a>
+      </p>
+    </div>
+  </div>
+  
+  <div class="columns">
+    <div class="column">
+      <h2>Mission Statement</h2>
+      {{ org.mission }}
+
+      <h2>Organization information</h2>
+      {{ org.description }}
+
+      <h2>Reviews</h2>
+      <p>Would you recomend this organization?</p>
+      <p></p>
+    </div>
+    <div class="column">
+      <h2>Active Opportunties</h2>
+      <p>This organization has no active Opportunties.</p>
+      <p>Find volonteer opportunities from thousnds of organizations that need your help.</p>
+    </div>
+  </div>
+    

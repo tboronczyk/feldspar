@@ -1,0 +1,41 @@
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a href="/"><img src="/img/logo.png" alt="Volontulo" width="135" class="logo"></a>
+        <span class="navbar-burger burger">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div class="navbar-menu navbar-main-menu">
+        <div class="navbar-end">
+          {% if session.get('isAuthenticated') %}
+          <a href="/konto" class="navbar-item is-uppercase"
+            title="Agordi konton">Konto</a>
+          <a href="/elsaluti" class="navbar-item is-uppercase"
+            title="Elsaluti">Elsaluti</a>
+          {% else %}
+          <a href="/registrigxi" class="navbar-item is-uppercase"
+            title="Registriĝi">Registriĝi</a>
+          <a href="/ensaluti" class="navbar-item is-uppercase"
+            title="Ensaluti">Ensaluti</a>
+          {% endif %}          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+  document.querySelector(".navbar-burger").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.querySelector(".navbar-main-menu").classList.toggle("is-active");
+  });
+  
+  window.addEventListener("resize", (e) => {
+      document.querySelector(".navbar-main-menu.is-active").classList.remove("is-active");
+  });
+    </script>
+</header>

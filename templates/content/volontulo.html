@@ -1,0 +1,29 @@
+
+<div class="media">
+    <div class="media-left">
+      <figure class="image is-128x128">
+        <img src="/img/companylogo.png">
+      </figure>
+    </div>
+    <div class="media-content">
+      <h1>{{ volunteer.name }}</h1>
+        <strong>website</strong>: <a href="{{ volunteer.website }}">{{ volunteer.website }}</a><br>
+        <strong>email</strong>: <a href="mailto://{{ volunteer.email }}">{{ volunteer.email }}</a>
+      </p>
+    </div>
+  </div>
+  
+  <div class="columns">
+    <div class="column">
+      <h2>Volunteer information</h2>
+      {{ volunteer.description }}
+
+      <h2>Reviews</h2>
+      <p>Would you recomend this volunteer?</p>
+      <p></p>
+    </div>
+    <div class="column">
+...
+    </div>
+  </div>
+    

@@ -1,0 +1,6 @@
+{% if session.get('isAuthenticated') %}
+<h1>Welcome {{ session.get('account').username }}</h1>
+<p>You are logged in</p>
+{% else %}
+<h1>Hello world</h1>
+{% endif %}          

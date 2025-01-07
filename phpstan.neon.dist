@@ -1,0 +1,16 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    
+parameters:
+    level: 8
+    paths:
+        - .
+    excludePaths:
+        analyse:
+            - vendor
+    strictRules:
+        allRules: true
+        booleansInConditions: true
+
+    ignoreErrors:
+        - '#no value type specified in iterable type array#'
