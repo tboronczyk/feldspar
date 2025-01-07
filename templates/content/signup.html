@@ -1,0 +1,79 @@
+<div class="narrow-container">
+  <h1>Sign Up</h1>
+
+  {% include "layouts/common/error-message.html" %}
+
+  <form action="/signup" method="post">
+    <div class="field">
+      <label class="label">First Name</label>
+      <div class="control">
+        <input class="input{% if errors.firstName %} is-danger{% endif %}"
+          type="text" name="firstName" value="{{ firstName }}">
+        {% if errors.firstName %}
+        <p class="help is-danger">{{ errors.firstName }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Last Name</label>
+      <div class="control">
+        <input class="input{% if errors.lastName %} is-danger{% endif %}"
+          type="text" name="lastName" value="{{ lastName }}">
+        {% if errors.email %}
+        <p class="help is-danger">{{ errors.lastName }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input class="input{% if errors.email %} is-danger{% endif %}"
+          type="email" name="email" value="{{ email }}">
+        {% if errors.email %}
+        <p class="help is-danger">{{ errors.email }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input class="input{% if errors.password %} is-danger{% endif %}"
+          type="password" name="password" value="{{ password }}">
+        {% if errors.password %}
+        <p class="help is-danger">{{ errors.password }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Confirm Password</label>
+      <div class="control">
+        <input class="input{% if errors.confirmPassword %} is-danger{% endif %}"
+          type="password" name="confirmPassword" value="{{ confirmPassword }}">
+        {% if errors.confirmPassword %}
+        <p class="help is-danger">{{ errors.confirmPassword }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-link is-fullwidth" type="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <p>By creating an account, you consent to our
+          <a href="/terms" title="Terms of Service">Terms of Service</a>
+          and <a href="/privacy" title="Privacy Policy">Privacy Policy</a>.
+          </p>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <p>Already have an account?
+          <a href="/login" title="Log in">Log in</a>.</p>
+      </div>
+    </div>
+  </form>
+</div>

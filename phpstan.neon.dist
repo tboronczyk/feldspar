@@ -1,0 +1,13 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    
+parameters:
+    level: 10
+    paths:
+        - .
+    excludePaths:
+        analyse:
+            - vendor
+    strictRules:
+        allRules: true
+        booleansInConditions: true

@@ -1,0 +1,51 @@
+<div class="narrow-container">
+  <h1>Update Account</h1>
+
+  {% include "layouts/common/error-message.html" %}
+
+  <form action="/update-account" method="post">
+    <div class="field">
+      <label class="label">First Name</label>
+      <div class="control">
+        <input class="input{% if errors.firstName %} is-danger{% endif %}"
+          type="text" name="firstName" value="{{ account.firstName }}">
+        {% if errors.firstName %}
+        <p class="help is-danger">{{ errors.firstName }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Last Name</label>
+      <div class="control">
+        <input class="input{% if errors.lastName %} is-danger{% endif %}"
+          type="text" name="lastName" value="{{ account.lastName }}">
+        {% if errors.lastName %}
+        <p class="help is-danger">{{ errors.lastName }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input class="input{% if errors.email %} is-danger{% endif %}"
+          type="email" name="email" value="{{ account.email }}">
+        {% if errors.email %}
+        <p class="help is-danger">{{ errors.email }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <a href="/update-password" title="Update Password">Update
+          Password</a>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-link is-fullwidth" type="submit">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+{% for key, messages in session.getFlash().all() %}
+  {% for message in messages %}
+  <div class="narrow-container content">
+    <div class="message is-{{ key == 'error' ? 'danger' : key }}" role="alert">
+      <div class="message-body">
+        <div>{{ message }}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endfor %}

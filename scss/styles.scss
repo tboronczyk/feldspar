@@ -1,0 +1,170 @@
+@use "../node_modules/bulma/sass" as bulma;
+
+:root {
+  // #fff
+  --white-h: 0;
+  --white-s: 0%;
+  --white-l: 100%;
+
+  // #c84e4a
+  --red-h: 2;
+  --red-s: 63%;
+  --red-l: 51%;
+
+  // #55af7a
+  --green-h: 145;
+  --green-s: 51%;
+  --green-l: 64%;
+
+  // #f8f6f9
+  --background-color-h: 280;
+  --background-color-s: 23%;
+  --background-color-l: 97%;
+  --background-color: hsl(var(--background-color-h), var(--background-color-s), var(--background-color-l));
+
+  // #0c2337
+  --dark-background-color: hsl(207, 65%, 13%);
+
+  // ##6b5def
+  --link-h: 246;
+  --link-s: 82%;
+  --link-l: 65%;
+  --link-color: hsl(var(--link-h), var(--link-s), var(--link-l));
+
+  // #190038
+  --text-color: hsl(267, 100%, 11%);
+
+  --text-color-inverse: hsl(var(--white-h), var(--white-s), var(--white-l));
+
+  // ---- bulma overrides ----
+  --bulma-scheme-h: var(--background-color-h);
+  --bulma-scheme-s: var(--background-color-s);
+  --bulma-scheme-main-l: var(--background-color-l);
+
+  --bulma-link-h: var(--link-h);
+  --bulma-link-s: var(--link-s);
+  --bulma-link-l: var(--link-l);
+
+  --bulma-danger-h: var(--red-h);
+  --bulma-danger-s: var(--red-s);
+ 
+  --bulma-success-h: var(--green-h);
+  --bulma-success-s: var(--green-s);
+
+  body {
+    --bulma-body-color: var(--text-color);
+  }
+
+  .content {
+    --bulma-content-heading-color: var(--text-color);
+  }
+
+  .label {
+    --bulma-label-color: var(--text-color);
+  }
+
+  .input {
+    --bulma-input-h: var(--white-h);
+    --bulma-input-s: var(--white-s);
+    --bulma-input-l: var(--white-l);
+  }
+
+  .message-body {
+    --bulma-message-border-style: none;
+  }
+}
+
+// expand content area to keep footer at bottom of page
+html {
+  height: 100%;
+
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    main {
+      flex: 1 0 auto;
+    }
+
+    &>footer {
+      flex-shrink: 0;
+    }
+  }
+}
+
+// prevent content area's width from collapsing if there's
+// insufficient text
+main {
+  width: 100%;
+}
+
+// nav menu on mobile shouldn't shift layout
+@media screen and (max-width: bulma.$desktop) {
+  .navbar-menu.is-active {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.narrow-container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+}
+
+// styles
+body {
+  &>header {
+    padding: 1em;
+  }
+
+  main {
+    padding: 1em;
+
+    &>.container {
+      padding-bottom: 3.5em;
+    }
+
+    .content {
+      h1 {
+        font-size: 2.5em;
+      }
+
+      h2 {
+        font-size: 1.75em;
+      }
+
+      li {
+        font-size: 1em;
+      }
+
+      form {
+        margin-bottom: var(--bulma-content-block-margin-bottom);
+      }
+
+      .help {
+        font-size: 0.8em;
+      }
+
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &>footer {
+    background: var(--dark-background-color);
+    color: var(--text-color-inverse);
+    padding: 2em 1em;
+
+    a {
+      color: var(--text-color-inverse);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

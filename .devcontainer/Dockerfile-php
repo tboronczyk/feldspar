@@ -1,0 +1,10 @@
+ARG php_version
+
+FROM php:${php_version}-fpm
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends unzip libicu-dev pkg-config libzstd-dev \
+    && pecl install redis && docker-php-ext-enable redis \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install intl pdo_mysql
