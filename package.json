@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "build": "sass scss/styles.scss public/css/styles.css",
+        "watch": "npm run build -- --watch"
+    },
+    "devDependencies": {
+        "bulma": "^1.0.3",
+        "sass": "^1.83.1"
+    }
+}

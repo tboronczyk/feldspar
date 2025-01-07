@@ -1,0 +1,41 @@
+        <div class="narrow-centered">
+          <h1>Change Password</h1>
+          <p>Enter the one-time use password-reset token sent to you
+            via email and reset your password.</p>
+          {% if error %}
+          <div class="message is-danger">
+            <div class="message-body">
+              <div>{{error}}</div>
+            </div>
+          </div>
+          {%endif%}
+        
+          <form action="/otp-reset" method="POST">
+            <input type="hidden" name="email" value="{{email}}">
+            <div class="field">
+              <label class="label">OTP Token</label>
+              <div class="control">
+                <input class="input{% if errors %} is-danger{% endif %}" name="otpToken" value="{{otpToken}}">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">New Password</label>
+              <div class="control">
+                <input class="input{% if errors %} is-danger{% endif %}" type="password" name="newPassword"
+                  value="{{newPassword}}">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Confirm New Password</label>
+              <div class="control">
+                <input class="input{% if errors %} is-danger{% endif %}" type="password" name="confirmPassword"
+                  value="{{confirmPassword}}">
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button class="button is-link">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>

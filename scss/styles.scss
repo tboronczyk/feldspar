@@ -1,0 +1,55 @@
+@use "../node_modules/bulma/sass" as bulma with (
+  $family-primary: 'sans-serif'
+);
+
+// expand content area to keep footer at bottom of page
+html { height: 100%; }
+body { display: flex; flex-direction: column; height: 100%; }
+main { flex: 1 0 auto; }
+.footer { flex-shrink: 0; }
+
+// prevent content area's width from collapsing if there's
+// insufficient text
+main.container { width: 100%; }
+
+// nav menu on mobile shouldn't shift layout
+@media screen and (max-width: bulma.$desktop) {
+  .navbar-menu.is-active {
+    position: absolute;
+    width: 100%;
+  }
+  .content.container {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+
+.navbar-main {
+  padding: 1em;
+}
+
+.footer {
+  & {
+    margin-top: 2.5em;
+    padding-bottom: 2em;
+  }
+
+  nav {
+    a {
+      &:not(:last-child)::after {
+        content: ' | ';
+      }
+    }
+  }
+}
+
+main a {
+  text-decoration: underline;
+}
+
+.narrow-centered {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+}

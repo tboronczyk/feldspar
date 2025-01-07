@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+use DI\ContainerBuilder;
+use Dotenv\Dotenv;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+Dotenv::createImmutable(__DIR__ . '/../')->load();
+
+$container = (new ContainerBuilder())
+    ->addDefinitions(__DIR__ . '/../app/container.php')
+    ->build();
+
+$redis = $container->get(Redis::class);
+$config = $container->get('config');
+$workerQueue = $config['redis']['workerQueue'];
+
+$task = $redis->rPop($workerQueue);
+if ($task === false) {
+    // No work to do
+    exit;
+}
+
+if (
+    !is_array($task)
+    || !isset($task['worker'])
+    || !isset($task['args'])
+) {
+    throw new RuntimeException('Malformed task data');
+}
+
+$worker = $container->get($task['worker']);
+$worker(...$task['args']);

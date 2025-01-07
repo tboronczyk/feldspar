@@ -1,0 +1,37 @@
+<header class="header">
+  <nav class="navbar-main navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a href="/"><img src="/img/logo.png" alt="SITE_NAME" width="325" class="logo"></a>
+        <span class="navbar-burger burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </div>
+      <div class="navbar-main-menu navbar-menu">
+        <div class="navbar-end">
+          {% if session.get('isAuthenticated') %}
+          <a href="/update-user" class="navbar-item is-uppercase">Update User</a>
+          <a href="/update-password" class="navbar-item is-uppercase">Update Password</a>
+          <a href="/logout" class="navbar-item is-uppercase">Logout</a>
+          {% else %}
+          <a href="/signup" class="navbar-item is-uppercase">Signup</a>
+          <a href="/login" class="navbar-item is-uppercase">Login</a>
+          {% endif %}          
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+  document.querySelector(".navbar-burger").addEventListener("click", (e) => {
+      e.preventDefault();
+      document.querySelector(".navbar-main-menu").classList.toggle("is-active");
+  });
+  
+  window.addEventListener("resize", (e) => {
+      document.querySelector(".navbar-main-menu.is-active").classList.remove("is-active");
+  });
+    </script>
+</header>
