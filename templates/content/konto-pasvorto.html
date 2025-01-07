@@ -1,0 +1,47 @@
+  <form hx-post="/konto/pasvorto" hx-target="this" hx-swap="outerHTML">
+    <div class="field">
+      <label class="label">Nuna pasvorto</label>
+      <div class="control">
+        <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+          value="{{ password.password }}" placeholder="••••••••">
+        {% if errors.password %}
+        <p class="help is-danger">{{ errors.password }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Nova pasvorto</label>
+      <div class="control">
+        <input class="input{% if errors.newPassword %} is-danger{% endif %}" type="password" name="newPassword"
+          value="{{ password.newPassword }}" placeholder="••••••••">
+        {% if errors.newPassword %}
+        <p class="help is-danger">{{ errors.newPassword }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Ripeti pasvorton</label>
+      <div class="control">
+        <input class="input{% if errors.confirmPassword %} is-danger{% endif %}" type="password" name="confirmPassword"
+          value="{{ password.confirmPassword }}" placeholder="••••••••">
+        {% if errors.confirmPassword %}
+        <p class="help is-danger">{{ errors.confirmPassword }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field is-grouped is-grouped-right mt-5">
+      <div class="control">
+        <button class="button is-primary" type="submit">
+          Ĝisdatigi
+        </button>
+      </div>
+      <div class="control">
+        <button class="button" hx-get="/konto/pasvorto" hx-target="closest form" hx-swap="outerHTML">
+          Nuligi
+        </button>
+      </div>
+    </div>
+  </form>

@@ -1,0 +1,52 @@
+<div class="media">
+  <div class="media-left">
+    <figure class="image is-128x128">
+      <img src="/img/organization.png">
+    </figure>
+  </div>
+  <div class="media-content">
+    <h1>{{ organizer.name }}</h1>
+    <p>{{ organizer.location }}<br>
+      <strong>website</strong>: <a href="{{ organizer.website }}">{{ organizer.website }}</a><br>
+      <strong>email</strong>: <a href="mailto://{{ organizer.email }}">{{ organizer.email }}</a>
+    </p>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column">
+    <h2>Mission Statement</h2>
+    {{ organizer.mission }}
+
+    <h2>Organization information</h2>
+    {{ organizer.description }}
+
+    <h2>Reviews</h2>
+    <p>Would you recomend this organization?</p>
+    <p></p>
+  </div>
+  <div class="column">
+    <h2>Active Opportunties</h2>
+    {% for task in tasks %}
+    <div class="card">
+      <div class="card-content">
+        <p class="title">
+          {{ task.name }}
+        </p>
+        <p class="subtitle">
+          {{ task.description }}
+        </p>
+      </div>
+      <footer class="card-footer">
+        <p class="card-footer-item">
+          <span>
+            <a href="/tasko/{{ task.id }}">View Opportunity</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+    {% endfor %}
+    <p>This organization has no active Opportunties.</p>
+    <p>Find volonteer opportunities from thousnds of organizations that need your help.</p>
+  </div>
+</div>

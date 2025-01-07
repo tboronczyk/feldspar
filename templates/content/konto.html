@@ -1,0 +1,41 @@
+<div class="columns">
+  <div class="column is-one-quarter">
+    <aside class="menu is-sticky">
+      <ul class="menu-list">
+        <li class="menu-list-item">
+          <a id="profile-link" href="#profilo">
+            <svg class="icon mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            Ĝisdatigi profilon
+          </a>
+        </li>
+        <li class="menu-list-item">
+          <a id="password-link" href="#pasvorto">
+            <svg class="icon mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Ŝanĝi pasvorton
+          </a>
+        </li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="column is-three-quarters mr-5">
+    <section id="profilo" class="box">
+      <h1 class="title is-4">Ĝisdatigi profilon</h1>
+      {% include 'content/konto-bildo.html' %}
+      {% include 'content/konto-profilo.html' %}
+    </section>
+
+    <section id="pasvorto" class="box">
+      <h1 class="title is-4">Ŝanĝi pasvorton</h1>
+      {% include 'content/konto-pasvorto.html' %}
+    </section>
+  </div>
+</div>

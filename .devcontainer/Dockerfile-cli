@@ -1,0 +1,65 @@
+ARG php_version
+
+FROM php:${php_version}-cli
+
+ARG cli_username
+ARG cli_uid
+ARG cli_gid
+ARG node_version
+
+RUN apt-get update
+
+# Install PHP extensions
+RUN apt-get install -y --no-install-recommends unzip libicu-dev pkg-config libzstd-dev \
+    && docker-php-ext-install intl pdo_mysql \
+    && pecl install redis && docker-php-ext-enable redis \
+    && pecl install xdebug && docker-php-ext-enable xdebug
+
+RUN apt-get update && apt-get install -y libfreetype-dev libjpeg62-turbo-dev libpng-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Install other tools
+RUN apt-get install -y --no-install-recommends sudo default-mysql-client git redis
+
+# Install Node.js
+RUN groupadd --gid $cli_gid $cli_username \
+    && useradd --uid $cli_gid --gid $cli_gid -m $cli_username \
+    && chsh -s /bin/bash $cli_username \
+    && echo $cli_username ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$cli_username \
+    && chmod 0440 /etc/sudoers.d/$cli_username
+
+ENV NODE_VERSION=$node_version
+ENV NVM_DIR=/usr/local/nvm
+
+RUN mkdir -p $NVM_DIR \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+# Set up NVM in bash profile for vscode user
+RUN echo "export NVM_DIR=\"/usr/local/nvm\"" >> /home/$cli_username/.bashrc \
+    && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> /home/$cli_username/.bashrc \
+    && echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /home/$cli_username/.bashrc
+
+ENV NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH=$NVM_DIR/v$NODE_VERSION/bin:$PATH
+
+# Install dependencies for Cypress
+RUN apt-get install -y --no-install-recommends libgtk-3-dev libnotify-dev libgconf-2-4 \
+  libnss3 libxss1 libasound2 libxtst6 xauth xvfb libatk-bridge2.0-0 libgbm-dev
+
+# Clean up
+RUN apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspaces
+RUN chown -R $cli_username:$cli_username /workspaces
+
+USER $cli_username
+SHELL ["/bin/bash", "-c"]
