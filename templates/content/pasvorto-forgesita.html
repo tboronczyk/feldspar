@@ -1,0 +1,28 @@
+<div class="container is-narrow">
+  <div class="has-text-centered">
+    <h1>Pasvorto forgesita</h1>
+  </div>
+  <p>Entajpu la retpoŝtadreson de via konto kaj ni sendos
+    al vi instrukciojn por starigi novan pasvorton.</p>
+
+  <form action="/pasvorto/forgesita" method="post">
+    <div class="field">
+      <label class="label">Retpoŝtadreso</label>
+      <div class="control">
+        <input class="input{% if errors.email %} is-danger{% endif %}" type="email" name="email" value="{{ email }}"
+          placeholder="nomo@ekzemple.com">
+          {% if errors.email %}
+          <p class=" help is-danger">{{ errors.email }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field mt-5">
+      <div class="control">
+        <button class="button is-primary is-fullwidth" type="submit" onclick="this.disabled=true; this.form.submit();">
+          Sendi
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

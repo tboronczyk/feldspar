@@ -1,0 +1,7 @@
+.DS_Store
+.env
+cypress/screenshots/
+node_modules/
+public/css
+vendor/
+var/

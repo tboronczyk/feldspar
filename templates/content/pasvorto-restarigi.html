@@ -1,0 +1,41 @@
+    <div class="container is-narrow">
+      <div class="has-text-centered">
+        <h1>Restarigi pasvorton</h1>
+      </div>
+    
+      {% include 'layouts/common/error-message.html' with {'errorMessage': errors.error} %}
+    
+      <form action="/pasvorto/restarigi" method="post">
+        <input type="hidden" name="token" value="{{ token }}">
+
+        <div class="field">
+          <label class="label">Nova pasvorto</label>
+          <div class="control">
+            <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+              value="{{ password }}" placeholder="••••••••">
+            {% if errors.password %}
+            <p class="help is-danger">{{ errors.password }}</p>
+            {% endif %}
+          </div>
+        </div>
+    
+        <div class="field">
+          <label class="label">Ripeti novan pasvorton</label>
+          <div class="control">
+            <input class="input{% if errors.confirmPassword %} is-danger{% endif %}" type="password" name="confirmPassword"
+              value="{{ confirmPassword }}" placeholder="••••••••">
+            {% if errors.confirmPassword %}
+            <p class="help is-danger">{{ errors.confirmPassword }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field mt-5">
+          <div class="control">
+            <button class="button is-primary is-fullwidth" type="submit" onclick="this.disabled=true; this.form.submit();">
+              Restarigi
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>

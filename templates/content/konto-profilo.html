@@ -1,0 +1,110 @@
+{% include 'layouts/common/toast-message.html' %}
+
+<form hx-post="/konto/profilo" hx-target="this" hx-swap="outerHTML" hx-disabled-elt="#profilo-submit, #profilo-reset">
+  <p class="divider is-left">Personaj informoj</p>
+  <div class="columns mb-0">
+    <div class="column">
+      <div class="field">
+        <label class="label">Persona nomo</label>
+        <div class="control">
+          <input class="input{% if errors.firstName %} is-danger{% endif %}" name="firstName"
+            value="{{ account.firstName }}" placeholder="Persona nomo">
+          {% if errors.firstName %}
+          <p class=" help is-danger">{{ errors.firstName }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label class="label">Familia nomo</label>
+        <div class="control">
+          <input class="input{% if errors.lastName %} is-danger{% endif %}" name="lastName"
+            value="{{ account.lastName }}" placeholder="Familia nomo">
+          {% if errors.lastName %}
+          <p class=" help is-danger">{{ errors.lastName }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Uzantnomo</label>
+    <div class="control">
+      <input class="input{% if errors.username %} is-danger{% endif %}" name="username" value="{{ account.username }}"
+        placeholder="Uzantnomo">
+      {% if errors.username %}
+      <p class=" help is-danger">{{ errors.username }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Lando</label>
+    <div id="country-control" class="control{% if account.country %} has-icons-left{% endif %}">
+      <div class="select is-fullwidth">
+        <select name="country" onchange="setCountryFlagIcon(this.value)">
+          <option value="" {% if account.country=='' %} selected{% endif %}>(nespecifita)</option>
+          {% for country in account.countries %}
+          <option value="{{ country.id }}" {% if country.id==account.country %} selected{% endif %}>
+            {{ country.name }}
+          </option>
+          {% endfor %}
+        </select>
+        <div id="country-icon" class="icon is-small is-left{% if account.country=='' %} is-hidden{%endif%}">
+          <img class="px-2" id='country-icon-img'
+            src="/img/flags/{% if account.country %}{{ account.country}}{% else %}unknown{% endif %}.svg">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function setCountryFlagIcon(country) {
+      const control = document.getElementById('country-control');
+      const icon = document.getElementById('country-icon');
+      const img = document.getElementById('country-icon-img');
+
+      if (country.length == 2) {
+        img.src = '/img/flags/' + country.toUpperCase() + '.svg';
+        control.classList.add('has-icons-left');
+        icon.classList.remove('is-hidden');
+      } else {
+        control.classList.remove('has-icons-left');
+        icon.classList.add('is-hidden');
+        img.src = '/img/flags/unknown.svg';
+      }
+    }
+  </script>
+
+  <div class="field">
+    <label class="label">Retpoŝtadreso</label>
+    <div class="control">
+      <input class="input{% if errors.email %} is-danger{% endif %}" type="email" name="email"
+        value="{{ account.email }}" placeholder="utzantnomo@ekzemple.com">
+      {% if errors.email %}
+      <p class=" help is-danger">{{ errors.email }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Sinprezento</label>
+    <div class="control">
+      <textarea class="textarea" name="profile" rows="5">{{ account.profile }}</textarea>
+    </div>
+  </div>
+
+  <div class="field is-grouped is-grouped-right mt-5">
+    <div class="control">
+      <button id="profilo-submit" class="button is-primary" type="submit">
+        Ĝisdatigi
+      </button>
+    </div>
+    <div class="control">
+      <button id="profilo-reset" class="button" hx-get="/konto/profilo" hx-target="closest form" hx-swap="outerHTML" hx-disabled-elt="#profilo-submit, #profilo-reset">
+        Nuligi
+      </button>
+    </div>
+  </div>
+</form>

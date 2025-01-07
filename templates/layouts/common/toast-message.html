@@ -1,0 +1,10 @@
+{% if toast.message %}
+<div class="toast has-text-centered">
+  <div class="message is-{{ toast.type == 'error' ? 'danger' : toast.type }}">
+    <div class="message-body">
+      {{ toast.message }}
+      <button class="delete is-pulled-right" onclick="this.closest('.toast').classList.add('is-hidden')"></button>
+    </div>
+  </div>
+</div>
+{% endif %}

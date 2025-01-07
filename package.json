@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "build": "sass scss/styles.scss public/css/styles.css",
+        "watch": "npm run build -- --watch",
+        "cypress:open": "cypress open",
+        "cypress:run": "cypress run --config-file cypress.config.js"
+    },
+    "devDependencies": {
+        "bulma": "^1.0.3",
+        "bulma-checkradio": "^2.1.3",
+        "cypress": "^14.0.0",
+        "sass": "^1.83.1"
+    }
+}

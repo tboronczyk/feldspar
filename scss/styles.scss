@@ -1,0 +1,248 @@
+@use "../node_modules/bulma/sass" as bulma;
+@use "bulma-divider.scss";
+@use "bulma-checkbox.scss";
+
+:root {
+  --bulma-family-primary: BlinkMacSystemFont, -apple-system, "Helvetica Neue",
+    "Helvetica", "Arial", sans-serif;
+
+  --background-color: white;
+  --footer-background-color: #00798a;
+  --menu-select-bg-color: hsl(221, 14%, 96%);
+  --text-color: oklch(0.372 0.044 257.287);
+  --link-color: #00798a;
+  --link-color-hover: #006071;
+  --border-color: hsl(221, 14%, 86%);
+}
+
+// expand content area to keep footer at bottom of page
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+body>footer {
+  flex-shrink: 0;
+}
+
+// prevent content area's width from collapsing if there's
+// insufficient text
+main {
+  width: 100%;
+}
+
+@media screen and (max-width: bulma.$desktop) {
+
+  // nav menu on mobile shouldn't shift layout
+  .navbar-menu.is-active {
+    position: absolute;
+    width: 100%;
+  }
+
+  // adjust padding of main content and footer to match 
+  // padding of navbar content
+  main>.container,
+  body>footer .container {
+    margin-left: 12px;
+    padding-right: 24px;
+  }
+}
+
+html {
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+}
+
+.noscript {
+  background-color: var(--text-color);
+  color: var(--background-color);
+  padding: 12px;
+  text-align: center;
+
+  a {
+    color: var(--background-color);
+    text-decoration: underline;
+  }
+}
+
+.navbar {
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-dropdown {
+  border: 1px solid var(--border-color);
+  border-top: 0;
+}
+@media screen and (max-width: bulma.$desktop) {
+  .navbar-dropdown {
+    border: 0;
+    padding: 0;
+  }
+}
+
+.navbar-item,
+.navbar-link,
+.navbar-burger,
+.navbar-dropdown a.navbar-item {
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: var(--link-color);
+}
+
+main>.container {
+  margin-top: 24px;
+  margin-bottom: 48px;
+}
+
+body>footer {
+  background-color: var(--footer-background-color);
+  color: white;
+}
+
+body>footer .container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+.footer-menu {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-menu a {
+  color: white;
+  font-weight: bold;
+
+  &:active,
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.container.is-narrow {
+  max-width: 500px !important;
+}
+
+div.is-fullwidth {
+  width: 100%;
+}
+
+@keyframes animateToastMessage {
+  0% { transform: translateY(-100%); }
+  10% { transform: translateY(0); }
+  90% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+.toast:not(.is-hidden) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  animation: animateToastMessage 4s ease-in-out forwards;
+}
+
+.message-body {
+  border: none;
+}
+
+.label {
+  font-weight: normal;
+
+  &:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+.button.is-primary {
+  background-color: var(--link-color);
+  color: white;
+
+  &:active,
+  &:focus,
+  &:hover,
+  &:disabled{
+    background-color: var(--link-color-hover);
+  }
+}
+
+.is-sticky {
+  position: sticky;
+  top: 20px;
+}
+
+.menu .menu-list {
+  list-style-type: none;
+  margin-inline-start: 0;
+
+  a {
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: var(--background-color);
+      text-decoration: none;
+    }
+  }
+}
+
+.box {
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+}
+
+.content {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: normal;
+  }
+
+  a {
+    color: var(--link-color);
+    font-weight: bold;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: var(--link-color-hover);
+      text-decoration: underline;
+    }
+  }
+
+  a.button {
+    color: var(--text-color);
+  }
+}
+
+// kontraŭ-spama 
+.ks:not(button) {
+  display: none;
+}
+

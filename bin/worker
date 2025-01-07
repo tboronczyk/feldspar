@@ -1,0 +1,37 @@
+#! /usr/local/bin/php
+<?php
+
+declare(strict_types=1);
+
+use DI\ContainerBuilder;
+use Dotenv\Dotenv;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+Dotenv::createImmutable(__DIR__ . '/../')->load();
+
+$container = (new ContainerBuilder())
+    ->addDefinitions(__DIR__ . '/../config/container.php')
+    ->build();
+
+$redis = $container->get(Redis::class);
+
+$workerQueue = 'feldspar.workers';
+
+$task = $redis->rPop($workerQueue);
+assert($task === false || is_array($task));
+
+if ($task === false) {
+    // No work to do
+    exit;
+}
+
+if (!is_string($task['worker']) || !is_array($task['args'])) {
+    throw new RuntimeException('Malformed task data');
+}
+
+$classname = $task['worker'];
+
+$worker = $container->get($task['worker']);
+assert(is_callable($worker));
+$worker(...$task['args']);

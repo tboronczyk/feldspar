@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="eo">
+
+  <head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{% if page.title %}{{ page.title }} | {% endif %}Volontulo</title>
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% endif %}
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="index,follow,noodp">
+
+    <link rel="shortcut icon" href="/favicon.ico?v=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1">
+
+    <script src="/js/htmx.min.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block header %}
+    <header>
+      <noscript>
+        <div class="noscript">Necesas JavaScript por plene uzi la retejon. <a href="https://www.enable-javascript.com/" title="Enable JavaScript">Lernu pli</a>.</div>
+      </noscript>
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+              <img src="/img/logo.png" alt="Volontulo" width="135">
+            </a>
+            <div class="navbar-burger">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div class="navbar-menu">
+            <div class="navbar-end">
+              {% if session.get('isAuthenticated') %}
+              <a href="/taskoj" class="navbar-item" title="Taskoj">Taskoj</a>
+
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-flex">
+                  <figure class="image">
+                    <img id="navbar-avatar" class="is-rounded" src="/avatars/{{ session.get('account').id }}.png?{{ date().format('U') }}" alt="">
+                  </figure>
+                  <span>{{ session.get('account').username }}</span>
+                </a>
+
+                <div class="navbar-dropdown">
+                  <a href="/konto" class="navbar-item" title="Agordi konton">Konto</a>
+                  <a href="/elsaluti" class="navbar-item" title="Elsaluti">Elsaluti</a>
+                </div>
+              </div>
+              {% else %}
+              <a href="/registrigxi" class="navbar-item" title="Registriĝi">Registriĝi</a>
+              <a href="/ensaluti" class="navbar-item" title="Ensaluti">Ensaluti</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+      <script>
+        const btn = document.querySelector('.navbar-burger')
+        const menu = document.querySelector('.navbar-menu')
+        btn.addEventListener("click", (e) => {
+          e.preventDefault()
+          btn.classList.toggle('is-active')
+          menu.classList.toggle('is-active')
+        })
+        window.addEventListener('resize', (e) => {
+          btn.classList.remove('is-active')
+          menu.classList.remove('is-active')
+        })
+      </script>
+    </header>
+    {% endblock %}
+
+    <main>
+      <div class="container is-max-desktop">
+        {% block messages %}
+        {% for key, msgs in session.getFlash().all() %}
+        {% for msg in msgs %}
+        <div class="message is-{{ key == 'error' ? 'danger' : key }}">
+          <div class="message-body has-text-centered">
+            {{ msg }}
+          </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {% endblock %}
+
+        {% block content %}
+        <div class="content">
+          {{ page.content | raw }}
+        </div>
+        {% endblock %}
+      </div>
+    </main>
+
+    {% block footer %}
+    <footer>
+      <div class="container">
+        <nav class="footer-menu">
+          <a href="/uzokondicxoj" title="Uzokondiĉoj">Uzokondiĉoj</a>
+          <a href="/privateco" title="Politiko pri Privateco">Privateco</a>
+          <a href="/kuketoj" title="Deklaro pri Kuketoj">Kuketoj</a>
+          <a href="/kontakti" title="Kontakti">Kontakti</a>
+        </nav>
+        <p>&copy;{{ date().format('Y') }} Volontulo</p>
+      </div>
+    </footer>
+    {% endblock %}
+  </body>
+</html>

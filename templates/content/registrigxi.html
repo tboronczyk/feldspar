@@ -1,0 +1,164 @@
+<div class="container is-narrow">
+  <div class="has-text-centered">
+    <h1>Registriĝi</h1>
+    <p>Ĉu vi jam registriĝis?
+      <a href="/ensaluti" title="Ensaluti">Ensalutu</a>
+    </p>
+  </div>
+
+  <p class="divider">Registriĝi per</p>
+  <div class="columns">
+    <div class="column">
+      {% include 'layouts/common/oauth2button.html' with {
+      'provider': 'Facebook',
+      'text': 'Facebook',
+      'href': '/registrigxi/facebook'
+      } %}
+    </div>
+    <div class="column">
+      {% include 'layouts/common/oauth2button.html' with {
+      'provider': 'Google',
+      'text': 'Google',
+      'href': '/registrigxi/google'
+      } %}
+    </div>
+  </div>
+
+  <p class="divider">Registriĝi per retpoŝtadreso</p>
+
+  {% include 'layouts/common/error-message.html' with {'errorMessage': errors.error} %}
+
+  <form action="/registrigxi" method="post">
+
+    <div class="columns mb-0">
+      <div class="column">
+        <div class="field">
+          <label class="label">Persona nomo</label>
+          <div class="control">
+            <input class="input{% if errors.firstName %} is-danger{% endif %}" name="firstName" value="{{ firstName }}"
+              placeholder="Persona nomo">
+            {% if errors.firstName %}
+            <p class=" help is-danger">{{ errors.firstName }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label class="label">Familia nomo</label>
+          <div class="control">
+            <input class="input{% if errors.lastName %} is-danger{% endif %}" name="lastName" value="{{ lastName }}"
+              placeholder="Familia nomo">
+            {% if errors.lastName %}
+            <p class=" help is-danger">{{ errors.lastName }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Uzantnomo</label>
+      <div class="control">
+        <input class="input{% if errors.username %} is-danger{% endif %}" name="username" value="{{ username }}"
+          placeholder="Uzantnomo">
+        {% if errors.username %}
+        <p class=" help is-danger">{{ errors.username }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field ks">
+      <label class="label">Sekso</label>
+      <div class="control">
+        <div class="select is-fullwidth">
+          <select name="gender" value="{{ gender }}">
+            <option value=""{% if gender == '' %} selected{% endif %} disabled>(elektu)</option>
+            <option value="male"{% if gender == 'male' %} selected{% endif %}>vira</option>
+            <option value="female"{% if gender == 'female' %} selected{% endif %}>virina</option>
+            <option value="other"{% if gender == 'other' %} selected{% endif %}>alia</option>
+            <option value="unspecified"{% if gender == 'unspecified' %} selected{% endif %}>nespecifita</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Retpoŝtadreso</label>
+      <div class="control">
+        <input class="input{% if errors.email %} is-danger{% endif %}" type="email" name="email" value="{{ email }}"
+          placeholder="utzantnomo@ekzemple.com">
+        {% if errors.email %}
+        <p class=" help is-danger">{{ errors.email }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field ks">
+      <label class="label">Ripeti retpoŝtadreson</label>
+      <div class="control">
+        <input class="input" type="email" name="confirmEmail" value="{{ confirmEmail }}" placeholder="utzantnomo@ekzemple.com">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Pasvorto</label>
+      <div class="control">
+        <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+          value="{{ password }}" placeholder="••••••••">
+        {% if errors.password %}
+        <p class="help is-danger">{{ errors.password }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Ripeti pasvorton</label>
+      <div class="control">
+        <input class="input{% if errors.confirmPassword %} is-danger{% endif %}" type="password" name="confirmPassword"
+          value="{{ confirmPassword }}" placeholder="••••••••">
+        {% if errors.confirmPassword %}
+        <p class="help is-danger">{{ errors.confirmPassword }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field ks">
+      <label class="label">Kie vi eksciis pri ni?</label>
+      <div class="control">
+        <div class="select is-fullwidth">
+          <select name="referrer" value="{{ referrer }}">
+            <option value=""{% if referrer == '' %} selected{% endif %} disabled>(elektu)</option>
+            <option value="facebook"{% if referrer == 'facebook' %} selected{% endif %}>Facebook</option>
+            <option value="google"{% if referrer == 'google' %} selected{% endif %}>Google</option>
+            <option value="reddit"{% if referrer == 'reddit' %} selected{% endif %}>Reddit</option>
+            <option value="twitter"{% if referrer == 'twitter' %} selected{% endif %}>X/Twitter</option>
+            <option value="other"{% if referrer == 'other' %} selected{% endif %}>alia</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field mt-5">
+      <p>Kiam vi registriĝas, vi akceptas la
+        <a href="/uzokondicxoj" title="Uzokondiĉoj">Uzokondiĉojn</a>
+        kaj <a href="/privateco" title="Politiko pri Privateco">Politikon pri privateco</a>.
+      </p>
+    </div>
+
+    <div class="field mt-5">
+      <div class="control">
+        <button class="button ks is-primary is-fullwidth" type="submit" disabled onclick="this.disabled=true; this.form.submit();">
+          Registriĝi
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.ks:not(button)').forEach((n) => n.parentNode.removeChild(n))
+    document.querySelector('button[type=submit]').disabled = false
+  }, 1000)
+</script>

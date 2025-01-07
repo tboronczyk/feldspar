@@ -1,0 +1,70 @@
+<div class="container is-narrow">
+  <div class="has-text-centered">
+    <h1>Ensaluti</h1>
+    <p>Ĉu vi ne havas la konton?
+      <a href="/registrigxi" title="Registriĝi">Registriĝu</a>
+    </p>
+  </div>
+
+  <p class="divider">Ensaluti per</p>
+  <div class="columns">
+    <div class="column">
+      {% include 'layouts/common/oauth2button.html' with {
+      'provider': 'Facebook',
+      'text': 'Facebook',
+      'href': '/ensaluti/facebook'
+      } %}
+    </div>
+    <div class="column">
+      {% include 'layouts/common/oauth2button.html' with {
+      'provider': 'Google',
+      'text': 'Google',
+      'href': '/ensaluti/google'
+      } %}
+    </div>
+  </div>
+
+  <p class="divider">Ensaluti per retpoŝtadreso</p>
+
+  {% include 'layouts/common/error-message.html' with {'errorMessage': errors.error} %}
+
+  <form action="/ensaluti" method="post">
+    <div class="field">
+      <label class="label">Retpoŝtadreso</label>
+      <div class="control">
+        <input class="input{% if errors.email %} is-danger{% endif %}" type="email" name="email" value="{{ email }}"
+          placeholder="uzantnomo@ekzemple.com">
+        {% if errors.email %}
+        <p class="help is-danger">{{ errors.email }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Pasvorto</label>
+      <div class="control">
+        <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+          value="{{ password }}" placeholder="••••••••">
+        {% if errors.password %}
+        <p class="help is-danger">{{ errors.password }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="field mt-5">
+      <div class="control">
+        <button class="button is-primary is-fullwidth" type="submit" onclick="this.disabled=true; this.form.submit();">
+          Ensaluti
+        </button>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control has-text-centered">
+        <p><a href="/pasvorto/forgesita" title="Forgesita pasvorto">
+            Mi forgesis la pasvorton
+          </a></p>
+      </div>
+    </div>
+  </form>
+</div>

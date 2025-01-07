@@ -1,0 +1,28 @@
+{% include 'layouts/common/toast-message.html' %}
+
+<form hx-post="/konto/bildo" hx-target="this" hx-swap="outerHTML" hx-encoding="multipart/form-data" hx-disabled-elt="#bildo-button">
+  <p class="divider is-left">Profilbildo</p>
+  <div class="field is-grouped is-align-items-center">
+    <div class="control">
+      <figure class="image is-128x128" style="cursor:pointer" onclick="document.getElementById('avatar').click(); return false;">
+        <img class="is-rounded" src="/avatars/{{ avatar.accountId }}.png?{{ date().format('U') }}" width="128">
+      </figure>
+    </div>
+    <div class="control">
+      <p class="help">
+      JPG, GIF, kaj PNG akceptitaj.<br>
+      Profilbildo estu kvadrate (ekz. 128 &times; 128 px).
+    </p>
+      <button id="bildo-button" class="button is-small" onclick="document.getElementById('avatar').click(); return false;">
+        Ŝanĝi bildon
+      </button>
+      <input id="avatar" class="is-hidden" type="file" name="avatar" accept="image/*"
+        onchange="this.form.dispatchEvent(new Event('submit', {bubbles: true}));">
+    </div>
+  </div>
+  {% if avatar.status == 'success' %}
+  <script>
+    document.getElementById('navbar-avatar').src = '/avatars/{{ session.get('account').id }}.png?{{ date().format('U') }}'
+  </script>
+  {% endif %}
+</form>

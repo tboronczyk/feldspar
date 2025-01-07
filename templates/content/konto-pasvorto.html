@@ -1,0 +1,57 @@
+<form hx-post="/konto/pasvorto" hx-target="this" hx-swap="outerHTML" hx-disabled-elt="#pasvorto-submit, #pasvorto-reset">
+  {% if not password.enablePasswordChange %}
+  <div class="field">
+    <div class="message is-warning">
+      <div class="message-body">
+        <p>Kontoj registritaj per Facebook aŭ Google (OAuth2) ne havas pasvorton.</p>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="field">
+    <label class="label">Nuna pasvorto</label>
+    <div class="control">
+      <input class="input{% if errors.password %} is-danger{% endif %}" type="password" name="password"
+        value="{{ password.password }}" placeholder="••••••••">
+      {% if errors.password %}
+      <p class="help is-danger">{{ errors.password }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Nova pasvorto</label>
+    <div class="control">
+      <input class="input{% if errors.newPassword %} is-danger{% endif %}" type="password" name="newPassword"
+        value="{{ password.newPassword }}" placeholder="••••••••">
+      {% if errors.newPassword %}
+      <p class="help is-danger">{{ errors.newPassword }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Ripeti pasvorton</label>
+    <div class="control">
+      <input class="input{% if errors.confirmPassword %} is-danger{% endif %}" type="password" name="confirmPassword"
+        value="{{ password.confirmPassword }}" placeholder="••••••••">
+      {% if errors.confirmPassword %}
+      <p class="help is-danger">{{ errors.confirmPassword }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field is-grouped is-grouped-right mt-5">
+    <div class="control">
+      <button id="pasvorto-submit" class="button is-primary" type="submit">
+        Ĝisdatigi
+      </button>
+    </div>
+    <div class="control">
+      <button id="pasvorto-reset" class="button" hx-get="/konto/pasvorto" hx-target="closest form" hx-swap="outerHTML" hx-disabled-elt="#pasvorto-submit, #pasvorto-reset">
+        Nuligi
+      </button>
+    </div>
+  </div>
+  {% endif %}
+</form>
